@@ -111,6 +111,16 @@
   background-color: black;
   height: 2px;
 }
+.loginPage {
+  
+  display: flex;
+  justify-content: space-between;
+  
+}
+.loginPage span{
+  padding: 5px;
+  margin: 5px;
+}
 
 .loginPage a{
   text-decoration: none;
