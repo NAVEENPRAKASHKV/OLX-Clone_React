@@ -6,7 +6,7 @@ import FirebaseContext,{Authcontext} from "../../store/FirebaseContext"
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore"; 
 import { db } from '../../firebase/config.js';
-
+import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
   const [name,setName] =useState("")
@@ -17,6 +17,7 @@ const Create = () => {
   const {user} = useContext(Authcontext)
   const [url, setUrl] = useState(""); // To store the image download URL
   const date = new Date()
+  const navigate =useNavigate()
   
   const handleSubmit = () => {
     if (image) {
@@ -45,6 +46,7 @@ const Create = () => {
           })
           .then(() => {
             console.log("Product added to Firestore!");
+            navigate("/")
           })
           .catch((error) => {
             console.error("Error adding product to Firestore:", error);
