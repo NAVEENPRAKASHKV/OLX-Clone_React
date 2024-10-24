@@ -3,10 +3,14 @@ import { db } from "../../firebase/config";
 import Heart from "../../assets/Heart";
 import "./Post.css";
 import {  collection, getDocs } from "firebase/firestore"; 
+import { PostContext } from "../../store/postContext";
+import { useNavigate } from "react-router-dom";
 
 function Posts() {
   const [products, setProducts] = useState([]);
-  const fetchProduct =async()=>{
+  const {SetPostDetails} =useContext(PostContext)
+  const navigate = useNavigate()
+  const fetchProduct =async()=>{ 
     const productsCollection = collection(db, "products");
     const querySnapshot = await getDocs(productsCollection);
     console.log(querySnapshot)
@@ -30,10 +34,18 @@ function Posts() {
         </div>
         <div className="cards">
           {products.length? products.map((data,index)=> {
+            
             const product = data?.doc?.data?.value?.mapValue?.fields
+            
             console.log(product)
             return(
-          <div key={index} className="card">
+          <div 
+          key={index} 
+          className="card" 
+          onClick={()=>{
+            SetPostDetails(product)
+            navigate("/view")
+            }}>
             <div className="favorite">
               <Heart></Heart>
             </div>
@@ -46,7 +58,7 @@ function Posts() {
               <p className="name"> {product?.name?.stringValue}</p>
             </div>
             <div className="date">
-              <span>Available</span>
+              <span>{product?.createdAt?.stringValue || "Available"}</span>
             </div>
           </div>
 )}):<h1>.....Loading</h1>}

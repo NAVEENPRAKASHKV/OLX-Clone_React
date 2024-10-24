@@ -42,7 +42,7 @@ const Create = () => {
             price,
             url: downloadURL, // Use downloadURL directly here
             userId: user.uid,
-            // createdAt: date.toDateString(),
+            createdAt: date.toDateString(),
           })
           .then(() => {
             console.log("Product added to Firestore!");
