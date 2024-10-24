@@ -60,7 +60,7 @@ function Header() {
           <hr />
           {user && <button onClick={handleLogout}>Logout</button>}
         </div>
-
+       <Link to="/create">
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
@@ -68,6 +68,7 @@ function Header() {
             <span>SELL</span>
           </div>
         </div>
+        </Link>
       </div>
     </div>
   );
